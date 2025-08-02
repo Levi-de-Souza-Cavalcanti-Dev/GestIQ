@@ -2,10 +2,9 @@
 """
 Script de execução para GestIQ com verificação de ambiente pyenv
 """
-
 import sys
 import subprocess
-import os
+
 
 def check_pyenv_environment():
     """Verifica se o ambiente pyenv está configurado corretamente"""
@@ -24,7 +23,10 @@ def check_pyenv_environment():
             return False
     except FileNotFoundError:
         print("❌ pyenv não encontrado!")
-        print("💡 Execute: python setup.py")
+        print("💡 Configure o ambiente virtual manualmente:")
+        print("   py -3.11 -m venv venv")
+        print("   .\\venv\\Scripts\\Activate.ps1")
+        print("   pip install -r requirements.txt")
         return False
 
 def main():
@@ -35,7 +37,9 @@ def main():
     # Verificar ambiente
     if not check_pyenv_environment():
         print("\n💡 Para configurar o ambiente:")
-        print("   python setup.py")
+        print("   py -3.11 -m venv venv")
+        print("   .\\venv\\Scripts\\Activate.ps1")
+        print("   pip install -r requirements.txt")
         return False
     
     # Executar o programa principal

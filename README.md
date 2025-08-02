@@ -18,42 +18,60 @@ Um sistema inteligente de controle por gestos usando OpenCV e MediaPipe que perm
 
 ## 📋 Pré-requisitos
 
-- Python 3.7+
-- Webcam funcional
-- Windows 10/11 (para compatibilidade com aplicações)
+- **Python 3.11+** (recomendado para compatibilidade com MediaPipe)
+- **Webcam funcional**
+- **Windows 10/11** (para compatibilidade com aplicações)
+- **Git** (para clonar o repositório)
 
 ## 🛠️ Instalação
 
 ### Pré-requisitos
-- **pyenv** instalado: [Instruções de instalação](https://github.com/pyenv/pyenv#installation)
+- Python 3.11+ (recomendado para compatibilidade com MediaPipe)
+- Webcam funcional
 
-### Setup Automático
+### Setup com Ambiente Virtual (Recomendado)
+
 1. **Clone o repositório:**
 ```bash
 git clone https://github.com/seu-usuario/GestIQ.git
 cd GestIQ
 ```
 
-2. **Execute o setup (configura pyenv automaticamente):**
+2. **Crie e ative o ambiente virtual:**
 ```bash
-python setup.py
+# Windows
+py -3.11 -m venv venv
+.\venv\Scripts\Activate.ps1
+
+# Linux/Mac
+python3.11 -m venv venv
+source venv/bin/activate
 ```
 
-### Setup Manual
-Se preferir configurar manualmente:
-
-1. **Configure o ambiente pyenv:**
-```bash
-pyenv install 3.11.7
-pyenv local 3.11.7
-```
-
-2. **Instale as dependências:**
+3. **Instale as dependências:**
 ```bash
 pip install -r requirements.txt
 ```
 
+**✅ Pronto!** O ambiente virtual está configurado e isolado do sistema.
+
+### Setup Manual (Sem Ambiente Virtual)
+```bash
+pip install -r requirements.txt
+```
+
+**⚠️ Nota:** O MediaPipe pode não funcionar com Python 3.13+. Use Python 3.11 ou 3.12 para melhor compatibilidade.
+
 ## 🎮 Como Usar
+
+### Com Ambiente Virtual
+```bash
+# Ativar ambiente virtual
+.\venv\Scripts\Activate.ps1
+
+# Executar o programa
+python gesture_control.py
+```
 
 ### Execução Simples
 ```bash
@@ -65,7 +83,14 @@ python run.py
 python gesture_control.py
 ```
 
-2. **Posicione sua mão na frente da câmera**
+### Atalho Rápido (Windows)
+```bash
+# Use o arquivo batch para ativar automaticamente
+activate_env.bat
+```
+
+### Primeira Execução
+1. **Posicione sua mão na frente da câmera**
 
 3. **Faça os gestos:**
    - 👌 **Gesto OK**: Abre o Notepad
@@ -108,10 +133,29 @@ elif gesture_type == "NEW_GESTURE":
 ```
 
 ### Modificar Ações
-Edite o método `execute_action()` para executar diferentes comandos:
+Edite o arquivo `config.py` para adicionar novas ações:
 ```python
-subprocess.Popen(["sua_aplicacao.exe"])
+ACTIONS = {
+    "OK": {
+        "app": "notepad.exe",
+        "description": "Abre o Notepad",
+        "color": COLORS['ok_gesture']
+    },
+    "NOVO_GESTO": {
+        "app": "sua_aplicacao.exe",
+        "description": "Sua descrição",
+        "color": COLORS['text']
+    }
+}
 ```
+
+### Configurações Avançadas
+O arquivo `config.py` permite personalizar:
+- **Câmera**: Resolução e FPS
+- **MediaPipe**: Sensibilidade de detecção
+- **Gestos**: Distância e cooldown
+- **Cores**: Interface visual
+- **Debug**: Informações de desenvolvimento
 
 ## 🐛 Solução de Problemas
 
@@ -128,6 +172,11 @@ subprocess.Popen(["sua_aplicacao.exe"])
 - Reduza a resolução da câmera
 - Ajuste `min_detection_confidence` para valores menores
 
+### Problemas de Import
+- **Erro "Import cv2 could not be resolved"**: Ative o ambiente virtual primeiro
+- **Erro MediaPipe**: Use Python 3.11+ e ambiente virtual
+- **Dependências não encontradas**: Execute `pip install -r requirements.txt` no ambiente virtual
+
 ## 🔮 Próximas Funcionalidades
 
 - [ ] Detecção de mais gestos (✌️, 🤙, 👊)
@@ -136,6 +185,20 @@ subprocess.Popen(["sua_aplicacao.exe"])
 - [ ] Interface gráfica personalizada
 - [ ] Configuração de gestos personalizados
 - [ ] Suporte a múltiplas mãos
+
+## 📁 Estrutura do Projeto
+
+```
+GestIQ/
+├── gesture_control.py      # Código principal do sistema
+├── config.py              # Configurações centralizadas
+├── requirements.txt        # Dependências do projeto
+├── README.md              # Documentação
+├── activate_env.bat       # Script de ativação (Windows)
+├── .gitignore            # Configuração Git
+├── venv/                 # Ambiente virtual (ignorado pelo Git)
+└── __pycache__/          # Cache Python (ignorado pelo Git)
+```
 
 ## 📚 Recursos Técnicos
 
@@ -169,8 +232,9 @@ GestureController
 - ✅ **Modular Design**: Funções pequenas e focadas
 - ✅ **Constants**: Configurações centralizadas
 - ✅ **Documentation**: Docstrings detalhadas
-- ✅ **Unit Tests**: Testes automatizados
-- ✅ **Configuration**: Arquivo de config separado
+- ✅ **Environment Management**: Ambiente virtual isolado
+- ✅ **Git Configuration**: `.gitignore` configurado corretamente
+- ✅ **Cross-Platform**: Suporte Windows/Linux/Mac
 
 ## 🤝 Contribuição
 

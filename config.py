@@ -4,17 +4,17 @@ Configurações centralizadas para o GestIQ
 
 # Configurações da câmera
 CAMERA_CONFIG = {
-    'width': 640,
-    'height': 480,
-    'fps': 30
+    'width': 1280,
+    'height': 720,
+    'fps': 60
 }
 
 # Configurações do MediaPipe
 MEDIAPIPE_CONFIG = {
     'static_image_mode': False,
     'max_num_hands': 1,
-    'min_detection_confidence': 0.7,
-    'min_tracking_confidence': 0.5
+    'min_detection_confidence': 0.9,
+    'min_tracking_confidence': 0.7
 }
 
 # Configurações de gestos
@@ -30,6 +30,12 @@ COLORS = {
     'thumbs_up': (255, 0, 0),       # Vermelho
     'peace_sign': (0, 255, 255),    # Amarelo
     'fist': (255, 255, 0),          # Ciano
+    'copy': (255, 0, 255),          # Magenta
+    'paste': (0, 255, 255),         # Ciano
+    'move': (255, 165, 0),          # Laranja
+    'resize': (128, 0, 128),        # Roxo
+    'minimize': (255, 20, 147),     # Rosa
+    'direct_control': (0, 128, 0),  # Verde escuro
     'text': (255, 255, 255),        # Branco
     'background': (0, 0, 0)         # Preto
 }
@@ -55,6 +61,36 @@ ACTIONS = {
         "app": "taskmgr.exe",
         "description": "Abre o Gerenciador de Tarefas",
         "color": COLORS['fist']
+    },
+    "COPY_GESTURE": {
+        "action": "copy",
+        "description": "Copia texto selecionado (Ctrl+C)",
+        "color": COLORS['copy']
+    },
+    "PASTE_GESTURE": {
+        "action": "paste",
+        "description": "Cola texto (Ctrl+V)",
+        "color": COLORS['paste']
+    },
+    "MOVE_WINDOW": {
+        "action": "move_window",
+        "description": "Move janela ativa",
+        "color": COLORS['move']
+    },
+    "RESIZE_WINDOW": {
+        "action": "resize_window", 
+        "description": "Redimensiona janela ativa",
+        "color": COLORS['resize']
+    },
+    "MINIMIZE_WINDOW": {
+        "action": "minimize_window",
+        "description": "Minimiza janela ativa",
+        "color": COLORS['minimize']
+    },
+    "DIRECT_WINDOW_CONTROL": {
+        "action": "direct_window_control",
+        "description": "Controle direto de janela com mão",
+        "color": COLORS['direct_control']
     }
 }
 
@@ -63,7 +99,7 @@ DEBUG_CONFIG = {
     'show_landmarks': True,
     'show_fps': True,
     'show_gesture_info': True,
-    'log_level': 'INFO'
+    'log_level': 'ERROR'
 }
 
 # Configurações de performance
